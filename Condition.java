@@ -134,7 +134,7 @@ public class Condition
 
         } // close range based for loop check
         
-    } // close for !lowerboundString.equal("Default")
+    } // close for !lowerboundString.equal("Default") if
     
     else{
 
