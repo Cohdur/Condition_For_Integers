@@ -32,42 +32,44 @@ public class Condition
     {
         Scanner read = new Scanner(System.in);
         upperBoundString = read.nextLine();
-
+        
         //checks for the one non numerical input..
         if(!(upperBoundString.equals("Default")))
         {
+        
+        //outter loop to break from range based for loop
+        checkForLetter : 
+        {
         //Numerical condition 
         for(var check : upperBoundString.toCharArray())
-        { 
+        {
 
-            if(check < 48 || check > 57)
+            while(check < 48 || check > 57)
             {
                 Logger.getGlobal().info("The only accepted input is a integer value UPPER");
                 upperBoundString = read.nextLine();
 
-                    // "Default condition"
-                    if(upperBoundString.equals("Default"))
-                    {
-                        upperBound = Integer.parseInt(Default);
-                        break;
-                    }
-                    else
-                    {
-                        upperBound = Integer.parseInt(upperBoundString);
-                        break;
-                    }
-            }
-        
-            else
-            {
-                break;
-            }
-        }
+                //"Default condition"
+                if(upperBoundString.equals("Default"))
+                {
+                    upperBound = Integer.parseInt(Default);
+                    break checkForLetter;
+                }
+                else
+                {
+                    upperBound = Integer.parseInt(upperBoundString);
+                    break checkForLetter;
+                }
 
-        }// close for !(lowerBoundString.equals("Default")) if 
+            }
+                        
+        } // close for outer most for loop 
 
-        else
-        {
+        }// close checkForLetter outer loop 
+
+        } // close for !(lowerBoundString.equals("Default")) if
+
+
         //condition for "Default value"
         if(upperBoundString.equals("Default"))
         {
@@ -79,8 +81,6 @@ public class Condition
             upperBound = Integer.parseInt(upperBoundString);
         }
 
-        }// close for !(lowerBoundString.equals("Default")) else
-
 
         // Lower bound input 
         System.out.print("Lower: ");
@@ -90,9 +90,12 @@ public class Condition
         if(!(lowerBoundString.equals("Default")))
         {
         //Copy of only numerical condition 
+        checkForLetter2 :
+        { 
+        
         for(var check2 : lowerBoundString.toCharArray())
         {         
-            if( check2 < 48 || check2 > 57)
+            while( check2 < 48 || check2 > 57 )
             {
                 Logger.getGlobal().info("The only accepted input is a integer value LOWER");
                 lowerBoundString = read.nextLine();
@@ -101,7 +104,7 @@ public class Condition
                 if(lowerBoundString.equals("Default"))
                 {
                     lowerBound = Integer.parseInt(Default);
-                    break;
+                    break checkForLetter2;
                 }
                 else
                 {
@@ -116,27 +119,27 @@ public class Condition
                         if(lowerBoundString.equals("Default"))
                         {
                             lowerBound = Integer.parseInt(Default);
+                            break checkForLetter2;
                         }
                         else
                         {
                             lowerBound = Integer.parseInt(lowerBoundString);
+                            break checkForLetter2;
                         }
                     } // close for while lowerBound == 0 condition
                      
-                    break;
+                    break checkForLetter2;
                 }
 
-            } // close for if check
-            else
-            {
-                break;
-            } 
+            } // close for while loop check2 < 48 || check2 > 57 
 
         } // close range based for loop check
         
-    } // close for !lowerboundString.equal("Default") if
-    
-    else{
+    } // close for checkForLetter2 outer loop
+
+    } // close for if(!(lowerBoundString.equals("Default")))
+
+    //else{
 
         //condition for "Default value"
         if(lowerBoundString.equals("Default"))
@@ -164,7 +167,7 @@ public class Condition
             }
         }
 
-        }// close for !lowerboundString.equal("Default") else
+        //}// close for !lowerboundString.equal("Default") else
 
         read.close();
     }//User_Input_Upper_Lower close bracket
@@ -184,7 +187,7 @@ public class Condition
     public static void main(String[] args)
     {
         // set the exception messages Default value is "ON"
-        Logger.getGlobal().setLevel(Level.OFF);
+        //Logger.getGlobal().setLevel(Level.OFF);
 
         String input;
         final String EXIT = "exit";
@@ -207,7 +210,7 @@ public class Condition
                 System.out.print("Enter a integer value for the upperbound: ");
                 classObj.User_Input_Upper_Lower();
 
-                System.out.println("You entered " + classObj.Get_Upper_Bound() + " for upper bound " + 
+                System.out.println("You entered\n" + classObj.Get_Upper_Bound() + " for upper bound " + 
                 '\n' + classObj.Get_Lower_Bound() + " for lower bound\n"); 
                 default:
                 break;
